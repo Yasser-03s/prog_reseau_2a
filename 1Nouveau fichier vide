@@ -1,0 +1,44 @@
+//ceci est pour socket programming avec TCP
+
+
+int socket(int domain, int type, int protocol){}
+int close(int s){}
+
+
+
+
+// primitive shutdown 
+// lorsque le client contacte le serveur, ce dernier crée une seconde socket dediée (socket d'écoute)
+
+
+
+// pour client:
+// socket() crée une socket
+// connect() permet de se connecter a un couple(adresse IP, port) et doit signaler succes/erreur
+// read(), write(), send(), recv() pour lire et ecrire dans la socket
+// close() pour fermet le socket
+
+
+
+// pour serveur:
+// socket() crée socket
+// bind() pour associer une adresse à la socket
+// listen() pour se mettre à l'écoute des connections
+// accept() pour accepter une connexion
+// read() ,write() ,send() ,recv() 
+// close()
+
+
+
+int connect(int s, const struct sockaddr *name, int namelen)
+
+//connecting to a remote socket:
+// int connect il faut savoir 2 struct:
+//     -struct sockaddr{sa_family(AF_INET ou INET6) et sa_data }
+//     -struct sockaddr_in{sin_family (ipv4 ou ipv6), sin_port(numero de port), sin_addr(l'adresse internet), sin_zero(un champ de 8 zeros)}
+//       +struct in_addr {unint32_t s_addr (4 octets)}
+
+
+
+//ntohl et ntohll et relation avec sockaddr_in???//
+//man -S2 bind????//
