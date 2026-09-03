@@ -22,8 +22,10 @@ int main(int argc, char* argv[]){
     server_addr.sin_port = htons(1234);
     //server_addr.sin_addr
     inet_aton("127.0.0.1", &server_addr.sin_addr); //ip config, ip addr
+    //aton ascii to network, pton presentation to network (plus moderne) la diff est pton donne l
     int ret_value;
     ret_value = connect(client_fd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+    //?? operation cast (struct sockaddr *)&server_addr
     die(ret_value,"On connecting...");
     return 0;
 }
