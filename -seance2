@@ -1,0 +1,12 @@
+creation de serveur
+
+man -S2 bind
+man -S2 listen 
+man -S2 accept
+
+
+serveur:
+>socket
+>bind
+>listen
+>accept (cree une socket)
