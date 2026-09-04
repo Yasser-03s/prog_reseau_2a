@@ -30,17 +30,19 @@ int main(int argc, char* argv[]){
     //?? operation cast (struct sockaddr *)&server_addr
     die(ret_value,"On connecting...");
 
-    char *msg="Bonjour";
-    int size_to_send=strlen(msg)+1;
+    while(1){
+        char *msg="Bonjour";
+        int size_to_send=strlen(msg)+1;
 
-    //first send msg size
-    int ret = write(client_fd,&size_to_send,sizeof(int));
-    die(ret,"on sending msg size");
-    printf("SIZE SENT %d \n", size_to_send);
+        //first send msg size
+        int ret = write(client_fd,&size_to_send,sizeof(int));
+        die(ret,"on sending msg size");
+        printf("SIZE SENT %d \n", size_to_send);
 
-    //then send msg itself
-    int sent_bytes = write(client_fd,msg,size_to_send);
-    die(sent_bytes, "on sending");
-    printf("msg sent (%s) (%d)\n", msg, size_to_send);
+        //then send msg itself
+        int sent_bytes = write(client_fd,msg,size_to_send);
+        die(sent_bytes, "on sending");
+        printf("msg sent (%s) (%d)\n", msg, size_to_send);
+    }
     return 0;
 }

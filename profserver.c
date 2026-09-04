@@ -51,15 +51,22 @@ int main(int argc, char* argv[]){
     char buf[128] = {0};
     int next_msg_size = 0;
 
-//first recv the next msg size
-    int ret = read(client_fd,&next_msg_size, sizeof(int));
-    die(ret,"on reading msg size\n");
-    printf("SIZE RCV %d\n", next_msg_size);
+while(1){
+    //first recv the next msg size
+        int ret = read(client_fd,&next_msg_size, sizeof(int));
+        if (ret == 0)
+            break;
+        die(ret,"on reading msg size\n");
+        printf("SIZE RCV %d\n", next_msg_size);
 //then recv the message itself  
 
-    read_bytes = read(client_fd,buf, 128);
-    die(read_bytes,"On reading");
-    printf("msg received: (%s) (%d)\n",buf, read_bytes);
+        read_bytes = read(client_fd,buf, 128);
+        if (read_bytes == 0)
+            break;
+        die(read_bytes,"On reading");
+        printf("msg received: (%s) (%d)\n",buf, read_bytes);
+    }
+        
     return 0;
 
 }
