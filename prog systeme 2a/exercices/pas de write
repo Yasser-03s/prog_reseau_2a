@@ -1,0 +1,17 @@
+write (fd ,data_ptr ,to_send ) ;
+
+///DOIT être remplacé par :
+
+
+size_t sent = 0; /* taille courante emise*/
+ssize_t ret = 0;
+do {
+    ret = write (fd , data_ptr + sent , to_send - sent ) ;
+    if ( -1 != ret ) { /* gestion des erreurs et / ou */
+
+        sent += ret ; /* du mode non - bloquant*/
+
+    } else {
+        /* Gestion des problemes */
+    }
+} while ( sent != to_send ) ;

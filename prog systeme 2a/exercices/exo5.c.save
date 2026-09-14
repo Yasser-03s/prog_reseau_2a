@@ -1,0 +1,17 @@
+//Écrivez un programme qui ouvre un fichier en lecture seule et qui crée le fichier en mode
+//lecture/écriture/exécution (uniquement pour vous). On supposera que ce fichier n’existe pas
+//déjà.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+
+
+int main(int argc, char *arv[]){
+    int fd = open("testexo5",O_RDONLY|O_CREAT, S_IRWXU);
+    printf("%d", fd);
+    exit(EXIT_SUCCESS);
+
+}
