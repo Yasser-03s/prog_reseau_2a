@@ -32,6 +32,7 @@ int main(int argc, char* argv[]){
     die(ret_bind,"On binding...");
     
     int ret_listen = listen(listen_fd, BACKLOG);
+    printf("mon listen fd est %d\n",listen_fd);
     die(ret_listen,"On listening...");
 
     // 2. CONFIGURATION DE POLL
@@ -42,6 +43,7 @@ int main(int argc, char* argv[]){
     // On commence par surveiller la socket d'écoute (le serveur lui-même)
     fds[0].fd = listen_fd;
     fds[0].events = POLLIN; // On veut savoir quand un nouveau client veut se connecter
+    fds[0].revents = 0;
     nfds++;
 
     // On initialise le reste du tableau à -1 (vide)

@@ -89,45 +89,25 @@ int main(int argc, char* argv[]){
     int k = 1;
 
     while(1){
+        printf("waiting for activity..");
         int nb_active_fd = poll(fds, FDS_SIZE, -1);
         die(nb_active_fd, "On polling...");
         for (int i=0 ; i<FDS_SIZE; i++){
             if(i == 0 && fds[0].revents & POLLIN){
-                struct sockaddr_in client_addr = {0};
-                client_addr.sin_family=AF_INET;
-                socklen_t sizeofaddr = sizeof(client_addr);
-                int client_fd = accept(listen_fd, (struct sockaddr *)&client_addr,&sizeofaddr);
-                die(client_fd, "On accepting...");
-                if (k == FDS_SIZE){
-                    printf("nb max client atteint!!\n");
-                    close(client_fd);
-                }
-                else{
-                    fds[k].fd = client_fd;
-                    fds[k].events = POLLIN;
-                    k++;
-                    printf("Nouveau client accepté, n° socket: %d\n", client_fd);
-                }
+                fds[i].revents = 0;
+                int client_fd = accept(listen_fd,NULL,NULL);
+                die(client_fd, "accept");
+                for (size_t j=0; j < FDS_SIZE;j++);
             }
-            else if(fds[i].revents & POLLIN ){
-                int client_fd = fds[i].fd;
-                if (client_fd<0){continue;}
-                struct message client_msg = {0};
-                int return_val = read_on_socket(client_fd, &client_msg, sizeof(struct message));
-                if(client_msg.size == 0){
-                    close(client_fd);
-                }
-                else{
-                    char * data = malloc(sizeof(char) * client_msg.size);
-                    if (data == NULL) {
-                        perror("malloc failed");
-                        exit(EXIT_FAILURE);
-                    }
-
-
-                    return_val = read_on_socket(client_fd, data, client_msg.size);
-                    printf("Le MSG du client %d est (%s)\n",client_fd - 3, data);
-                    free(data);
+            else if (fds[i].events & POLLIN){
+                fds[i].revents=0;
+                struct message msg = {0};
+                int ret = read_on_socket(fds[i].fd, &msg, sizeof(msg));
+                if (ret ==0){
+                    close(fds[i].fd);
+                    fds[i].fd = -1;
+                    fds[i].events = POLLIN;
+                    fds[i].revents = 0;
                 }
             }
         }
