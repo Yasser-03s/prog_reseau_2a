@@ -114,6 +114,7 @@ int main(int argc, char* argv[]){
                 if (client_fd<0){continue;}
                 struct message client_msg = {0};
                 int return_val = read_on_socket(client_fd, &client_msg, sizeof(struct message));
+                
                 if(client_msg.size == 0){
                     close(client_fd);
                 }
@@ -128,6 +129,7 @@ int main(int argc, char* argv[]){
                     return_val = read_on_socket(client_fd, data, client_msg.size);
                     printf("Le MSG du client %d est (%s)\n",client_fd - 3, data);
                     free(data);
+                    close(client_fd)
                 }
             }
         }
