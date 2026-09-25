@@ -1,0 +1,6 @@
+pour compiler tout les fichier.java
+javac com/library/*/*.java
+
+
+executer main par 
+java com.library.main.LibraryApp

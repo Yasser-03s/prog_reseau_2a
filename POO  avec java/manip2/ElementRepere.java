@@ -1,13 +1,19 @@
 public class ElementRepere{
+    private String titre;
+
+    public ElementRepere(String s){
+        this.titre=s;
+    }
     @Override
     public String toString(){
         //System.out.println("Je suis un ElementRepere.");
         return "Je suis un ElementRepere.";
     }
     public static void main(String[] argv){
-        Point p= new Point(1,2);
+        Point p= new Point(1,2,argv[0]);
+        ElementRepere E=new ElementRepere(argv[0]);
         System.out.println(p.toString());
-        
+        System.out.println(E.toString());
     }
 }
 
@@ -17,13 +23,14 @@ class Point extends ElementRepere{
     private int y;
 
 
-    public Point(int x, int y){
+    public Point(int x, int y, String titre){
+        super(titre);
         this.x=x;
         this.y=y;
     }
 
     public int getX(){
-        return this.x;
+        return this.x;  
     }
     public int getY(){
         return this.y;

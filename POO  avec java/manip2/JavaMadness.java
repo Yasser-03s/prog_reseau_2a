@@ -2,11 +2,16 @@ class JavaMadness {
     public static void main(String[] args) {
         System.out.println("Debut du point d’entree.");
         System.out.println("Declaration d’un objet de type Point.");
-        Point p;
+        Point p;// affiche rien
         System.out.println("Access a une propriete statique");
-        VerboseString s = Point.sX;
+        //VerboseString s = Point.sX; //affiche "sTitle cree statiquement." du parent
         System.out.println("Creation d’un objet de type Point.");
-        p = new Point(); // seule création d’objet du point d’entree.
+        //p = new Point(); // seule création d’objet du point d’entree.
+        //Etape 1 si on supprime VerboseString s = Point.sX;, le code affiche "sTitle cree statiquement." ici
+        //Etape 2 n'affiche rien car on a aucune creation
+        //affiche "x cree dynamiquement."
+        // puis "Appel du constructeur de Point."
+        
     }
 }
 
