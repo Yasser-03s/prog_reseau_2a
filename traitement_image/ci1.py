@@ -35,6 +35,7 @@ map= map[::int(256/6),:]
 map[2,:]= [1,0,1,1] 
 
 #ou bien coder hard a la main map = [[,,],[,,]]
+plt.hist(Worldmap.ravel(), bins=256, range=[0, 256])
 
 plt.figure()
 plt.imshow(Worldmap, ListedColormap(map))
