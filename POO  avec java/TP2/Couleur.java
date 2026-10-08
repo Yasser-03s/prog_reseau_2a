@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.InputMismatchException;
 
 public class Couleur{
     private int r;
@@ -28,12 +29,18 @@ public class Couleur{
         return new Couleur(255,255,255);
     }
     public Couleur(int r, int g, int b){   
+        if (r<0 || g<0 || b<0){
+            throw new InputMismatchException("Une composante de couleur est entre 0 et 255!");
+        }
+        if (r>255 || g>255 || b>255){
+            throw new InputMismatchException("Une composante de couleur est entre 0 et 255!");
+        }
         // Math.max(0,x) donne 0 si x negatif
         // Math.min(255,x) donne 255 so x>255
         //on combine et cela donne:     
-        this.r=Math.max(0,Math.min(255,r));
-        this.g=Math.max(0,Math.min(255,g));
-        this.b=Math.max(0,Math.min(255,b));
+        this.r=r;
+        this.g=g;
+        this.b=b;
     }
     public Couleur(){  
         //couleur noir par defaut    
