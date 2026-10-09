@@ -22,3 +22,5 @@ R = (X**2 + Y**2)**0.5; #operations directe sur les matrices
 img2 = 1000*np.sin(R/2)/R;
 plt.figure(2)
 plt.imshow(img2)
+
+
