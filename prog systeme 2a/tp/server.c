@@ -9,11 +9,11 @@
 #include <signal.h>
 #include <assert.h>
 
-
+#define CLIENT_MAX= 10
 
 
 int main(int argc, char* argv[]){
     pid_t pid= getpit();
     assert(open("/serverPID", )>0);
-
+    return 0;
 }
